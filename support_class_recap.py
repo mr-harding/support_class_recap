@@ -8,10 +8,10 @@ class Student:
 
 class StudentGUI:
 	def __init__(self, parent):
-		students = []
-		students.append(Student("Jane", 85))
-		students.append(Student("Joan", 65))
-		students.append(Student("Jess", 80))
+		self.students = []
+		self.students.append(Student("Jane", 85))
+		self.students.append(Student("Joan", 65))
+		self.students.append(Student("Jess", 80))
 
 		label1 = Label(parent, text = "STUDENT NCEA DATA MANAGER THING")
 		label1.pack()
@@ -21,16 +21,13 @@ class StudentGUI:
 
 	def check_pass(self):
 		CREDITS_REQUIRED = 80
-		print("No data yet..")		
+		for student in self.students:
+			if student.credits >= CREDITS_REQUIRED:
+				messagebox.showinfo("PASSED!", "{} has passed with {} credits".format(student.name, student.credits))
+			else:
+				messagebox.showerror(":(", "{} has not yet passed. {} more credits needed".format(student.name, CREDITS_REQUIRED - student.credits))	
 
 if __name__ == "__main__":
 	root = Tk()
 	w = StudentGUI(root)
 	root.mainloop()
-
-"""
-
-
-for s in students:
-	print(s.name, "has", s.credits, "credits")
-"""
